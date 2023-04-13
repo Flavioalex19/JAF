@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class IsoCamera : MonoBehaviour
 {
-    //player transform
-    Transform _playerTransform;
+    
+    [SerializeField]Transform _playerTransform;//player transform
+    PlayerInput _playerInput;
     Transform _dialogueFocusTransform;
+    [SerializeField]Camera _camera;
 
     bool _isOnPlayer;
 
@@ -14,6 +16,7 @@ public class IsoCamera : MonoBehaviour
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerInput = _playerTransform.GetComponent<PlayerInput>();
         _isOnPlayer = true;
     }
 
@@ -21,16 +24,20 @@ public class IsoCamera : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_playerTransform.GetComponent<PlayerInput>().GetCanInteract() == false)
+        if (_playerInput.GetCanInteract() == false)
         {
+            _camera.orthographicSize = 5;
             //update the positon
             transform.position = _playerTransform.position;
         }
         else
         {
-            _dialogueFocusTransform = _playerTransform.GetComponent<PlayerInput>().GetDialogueTransform();
+            _dialogueFocusTransform = _playerInput.GetDialogueTransform();
+            _camera.orthographicSize = 3;
             transform.position = _dialogueFocusTransform.position;
         }
+
+        
 
 
         

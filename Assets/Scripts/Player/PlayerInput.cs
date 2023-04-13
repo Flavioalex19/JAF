@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
     Transform _cam;// A reference to the main camera in the scenes transform
     Vector3 _camForward;// The current forward direction of the camera
     Vector3 _move;
+    bool _isMoving;
     public  Transform _dialogueTransform;// Changes de focus of the camera to the dialogue position
 
     bool _canInteract = false;//Verify if the player can interct with the object or NPC
@@ -39,12 +40,7 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Interaction") && _canInteract)
-        {
-            //Stop the movement
-            
-
-        }
+        
     }
 
     private void FixedUpdate()
@@ -64,8 +60,16 @@ public class PlayerInput : MonoBehaviour
             // we use world-relative directions in the case of no main camera
             _move = v * Vector3.forward + h * Vector3.right;
         }
+        if (_move.magnitude > 0)
+        {
+            _isMoving = true;
+        }
+        else
+        {
+            _isMoving= false;
+        }
         // pass all parameters to the Movement script
-        _movement.Move(_move);
+        _movement.Move(_move, _isMoving);
     }
 
     #region Get&Set
@@ -84,6 +88,10 @@ public class PlayerInput : MonoBehaviour
     public void SetDialogueTransform(Transform dialogueTransform)
     {
         _dialogueTransform = dialogueTransform;
+    }
+    public bool GetIsMoving()
+    {
+        return _isMoving;
     }
     #endregion
 }

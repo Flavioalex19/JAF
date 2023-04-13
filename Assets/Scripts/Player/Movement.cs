@@ -9,13 +9,14 @@ public class Movement : MonoBehaviour
     [SerializeField]float _movingTurnSpeed;
 
     //Private Variables
-    float _forwardAmount;
+    public float _forwardAmount;
     float _turnAmount;
     float _characterSpeed;
     Vector3 _groundNormal;
 
-    public void Move(Vector3 move)
+    public void Move(Vector3 move, bool isMoving)
     {
+        isMoving = true;
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired
         // direction.
