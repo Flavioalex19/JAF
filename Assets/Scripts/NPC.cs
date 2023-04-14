@@ -28,6 +28,7 @@ public class NPC : Interactables
 
                 if (_Myindex < _npcLines.Count)
                 {
+                    _mainCharacter.GetComponent<PlayerInput>().enabled = false;
                     print("NPC");
                     _uiManager.SetIsDialoguePanelOn(true);
                     _dialogueManager.Dialogue(_npcLines, _Myindex, _uiManager.GetIsDialoguePanelOn());
@@ -37,6 +38,7 @@ public class NPC : Interactables
                 {
                     _uiManager.SetIsDialoguePanelOn(false);
                     _Myindex = 0;
+                    _mainCharacter.GetComponent<PlayerInput>().enabled = true;
                 }
                 
 
