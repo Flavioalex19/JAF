@@ -1741,6 +1741,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 466757023}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1637304343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637304333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bb9989d64f7ae44aeaeecbedb77bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _comboTimer: 0.5
+  _comboResetTimer: 5
+  _comboCount: 0
+  _maxCombo: 3
+  _canCombo: 0
+  _animator: {fileID: 1637304340}
 --- !u!1 &1933673359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,10 +2059,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 36f7a7d6f747dc4488e21921a57b2759, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -2262,10 +2280,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0416af59b61ab5142aa5454b9b8b781e, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

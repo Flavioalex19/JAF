@@ -17,11 +17,13 @@ public class PlayerInput : MonoBehaviour
     #region Components
     //Components
     Movement _movement;
+    Combos _combos;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        _combos = GetComponent<Combos>();
         // get the transform of the main camera
         if (Camera.main != null)
         {
@@ -40,7 +42,22 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        #region Combos
+        //Combo
+        //_combos.CanComboCheck();
+        _combos.CheckCombo();
+        if (Input.GetMouseButtonDown(0))
+        {
+            _combos._canCombo = true;
+            //_combos.CheckCombo();
+            print("Start");
+            StartCoroutine("WaitFortTheInput");
+            _combos.StartCoroutine("Combo");
+            //_combos.AttackAnimationEvent();
+
+        }
+        _combos.ComboUpdate();
+        #endregion
     }
 
     private void FixedUpdate()
@@ -70,6 +87,8 @@ public class PlayerInput : MonoBehaviour
         }
         // pass all parameters to the Movement script
         _movement.Move(_move, _isMoving);
+
+        
     }
 
     #region Get&Set
@@ -94,4 +113,10 @@ public class PlayerInput : MonoBehaviour
         return _isMoving;
     }
     #endregion
+    //Controll the input
+    IEnumerator WaitFortTheInput()
+    {
+
+        yield return new WaitForSeconds(.5f);
+    }
 }
