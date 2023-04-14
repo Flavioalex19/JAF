@@ -20,6 +20,9 @@ public class PlayerInput : MonoBehaviour
     Combos _combos;
     #endregion
 
+    Ray cameraRay;                // The ray that is cast from the camera to the mouse position
+    RaycastHit cameraRayHit;    // The object that the ray hits
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,12 +45,28 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         #region Combos
         //Combo
         //_combos.CanComboCheck();
         _combos.CheckCombo();
         if (Input.GetMouseButtonDown(0))
         {
+            // Cast a ray from the camera to the mouse cursor
+            cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // If the ray strikes an object...
+            if (Physics.Raycast(cameraRay, out cameraRayHit))
+            {
+                // ...and if that object is the ground...
+                if (cameraRayHit.transform.tag == "Ground")
+                {
+                    // ...make the cube rotate (only on the Y axis) to face the ray hit's position 
+                    Vector3 targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
+                    transform.LookAt(targetPosition);
+                }
+            }
             _combos._canCombo = true;
             //_combos.CheckCombo();
             print("Start");
