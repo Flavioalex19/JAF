@@ -1,26 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1101 &-8791903098140948433
+--- !u!1101 &-8833587263412602446
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: Combat to Movement
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: CanCombo
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isMoving
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -5821250997093336222}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
-  m_IsExit: 0
+  m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.25000006
+  m_TransitionDuration: 0.14797324
   m_TransitionOffset: 0
-  m_ExitTime: 0.013257587
-  m_HasExitTime: 0
+  m_ExitTime: 0.4293718
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -31,7 +34,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: Attack to Idle
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: CanCombo
@@ -59,10 +62,13 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: Combat to Idle
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: CanCombo
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -70,9 +76,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.24999999
+  m_TransitionDuration: 0.041454077
   m_TransitionOffset: 0
-  m_ExitTime: 0.009130686
+  m_ExitTime: 0.9475259
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -91,6 +97,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -6002613603342720090}
   - {fileID: -38156952452368967}
+  - {fileID: -8833587263412602446}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -176,18 +183,15 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: CanCombo
     m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: ComboCount
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5821250997093336222}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.0115802
+  m_TransitionDuration: 0.11579284
+  m_TransitionOffset: 0.004940512
+  m_ExitTime: 0.00072548946
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -233,9 +237,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.16635305
-  m_TransitionOffset: 0.0013446442
-  m_ExitTime: 0.4905022
+  m_TransitionDuration: 0.16635302
+  m_TransitionOffset: 0
+  m_ExitTime: 0.4497461
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -346,7 +350,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1398450547030474297}
-  - {fileID: -8791903098140948433}
+  - {fileID: 4239536759557725697}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -394,6 +398,31 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 1180, y: 130, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 4622591474547665339}
+--- !u!1101 &4239536759557725697
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: CanCombo
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -5821250997093336222}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.16358751
+  m_TransitionOffset: 0
+  m_ExitTime: 0.012936109
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &4622591474547665339
 AnimatorState:
   serializedVersion: 6
@@ -428,7 +457,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: Attack to Movement
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: CanCombo
@@ -543,8 +572,8 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 60, y: 40, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 960, y: 200, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: -50, z: 0}
+  m_ExitPosition: {x: 790, y: 200, z: 0}
+  m_ParentStateMachinePosition: {x: 500, y: -40, z: 0}
   m_DefaultState: {fileID: -5821250997093336222}
 --- !u!1101 &8757226017965645381
 AnimatorStateTransition:
