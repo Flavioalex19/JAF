@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class IsoCamera : MonoBehaviour
 {
@@ -33,8 +34,10 @@ public class IsoCamera : MonoBehaviour
         else
         {
             _dialogueFocusTransform = _playerInput.GetDialogueTransform();
-            _camera.orthographicSize = 3;
-            transform.position = _dialogueFocusTransform.position;
+            //_camera.orthographicSize = 3;
+            //transform.position = _dialogueFocusTransform.position;
+            
+
         }
 
         

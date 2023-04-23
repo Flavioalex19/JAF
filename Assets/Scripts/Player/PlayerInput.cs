@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     Vector3 _camForward;// The current forward direction of the camera
     Vector3 _move;
     bool _isMoving;
+    bool _isAttacking = false;
     public  Transform _dialogueTransform;// Changes de focus of the camera to the dialogue position
 
     bool _canInteract = false;//Verify if the player can interct with the object or NPC
@@ -47,7 +48,6 @@ public class PlayerInput : MonoBehaviour
     {
         #region Combos
         //Combo
-        //_combos.CanComboCheck();
         _combos.CheckCombo();
         if (Input.GetMouseButtonDown(0))
         {
@@ -63,11 +63,12 @@ public class PlayerInput : MonoBehaviour
                     // ...make the cube rotate (only on the Y axis) to face the ray hit's position 
                     Vector3 targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
                     transform.LookAt(targetPosition);
+
                 }
             }
-            _combos._canCombo = true;
+            //_combos._canCombo = true;
+            _combos.SetCanCombo(true);
             //_combos.CheckCombo();
-            print("Start");
             StartCoroutine("WaitFortTheInput");
             _combos.StartCoroutine("Combo");
             //_combos.AttackAnimationEvent();
@@ -79,33 +80,35 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // read inputs
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        // calculate move direction to pass to character
-        if (_cam != null)
+        //Dont move while attacking
+        if (_isAttacking == false)
         {
-            // calculate camera relative direction to move:
-            _camForward = Vector3.Scale(_cam.forward, new Vector3(1, 0, 1)).normalized;
-            _move = v * _camForward + h * _cam.right;
+            // read inputs
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            // calculate move direction to pass to character
+            if (_cam != null)
+            {
+                // calculate camera relative direction to move:
+                _camForward = Vector3.Scale(_cam.forward, new Vector3(1, 0, 1)).normalized;
+                _move = v * _camForward + h * _cam.right;
+            }
+            else
+            {
+                // we use world-relative directions in the case of no main camera
+                _move = v * Vector3.forward + h * Vector3.right;
+            }
+            if (_move.magnitude > 0)
+            {
+                _isMoving = true;
+            }
+            else
+            {
+                _isMoving = false;
+            }
+            // pass all parameters to the Movement script
+            _movement.Move(_move, _isMoving);
         }
-        else
-        {
-            // we use world-relative directions in the case of no main camera
-            _move = v * Vector3.forward + h * Vector3.right;
-        }
-        if (_move.magnitude > 0)
-        {
-            _isMoving = true;
-        }
-        else
-        {
-            _isMoving= false;
-        }
-        // pass all parameters to the Movement script
-        _movement.Move(_move, _isMoving);
-
-        
     }
 
     #region Get&Set
@@ -133,7 +136,8 @@ public class PlayerInput : MonoBehaviour
     //Controll the input
     IEnumerator WaitFortTheInput()
     {
-
+        _isAttacking = true;
         yield return new WaitForSeconds(.5f);
+        _isAttacking = false;
     }
 }

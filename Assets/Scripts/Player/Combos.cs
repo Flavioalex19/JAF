@@ -9,7 +9,7 @@ public class Combos : MonoBehaviour
     [SerializeField] float _comboResetTimer;
     [SerializeField] int _comboCount;
     [SerializeField] int _maxCombo;
-    [SerializeField]public bool _canCombo = false;
+    [SerializeField] bool _canCombo = false;
     #endregion
 
     //Components
@@ -26,6 +26,10 @@ public class Combos : MonoBehaviour
     public bool GetCanCombo()
     {
         return _canCombo;
+    }
+    public void SetCanCombo(bool canCombo)
+    {
+        _canCombo = canCombo;
     }
     public int GetComboCount()
     {
@@ -71,14 +75,6 @@ public class Combos : MonoBehaviour
         //print(damage);
         //return damage;
     }
-    //Update the animations
-    void ComboUpdate(Animator animator)
-    {
-        animator.SetBool("CanCombo", _canCombo);
-        animator.SetFloat("ComboCount", _comboCount);
-
-    }
-
     //Update the animations
     public void ComboUpdate()
     {
