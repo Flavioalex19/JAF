@@ -15,6 +15,9 @@ public class PlayerInput : MonoBehaviour
 
     bool _canInteract = false;//Verify if the player can interct with the object or NPC
 
+    //test
+    public bool aimCamera = false;
+
     #region Components
     //Components
     Movement _movement;
@@ -45,35 +48,42 @@ public class PlayerInput : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         #region Combos
         //Combo
         _combos.CheckCombo();
         if (Input.GetMouseButtonDown(0))
         {
-            // Cast a ray from the camera to the mouse cursor
-            cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            // If the ray strikes an object...
-            if (Physics.Raycast(cameraRay, out cameraRayHit))
+            
+            if (!aimCamera)
             {
-                // ...and if that object is the ground...
-                if (cameraRayHit.transform.tag == "Ground")
-                {
-                    // ...make the cube rotate (only on the Y axis) to face the ray hit's position 
-                    Vector3 targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
-                    transform.LookAt(targetPosition);
+                // Cast a ray from the camera to the mouse cursor
+                cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+                // If the ray strikes an object...
+                if (Physics.Raycast(cameraRay, out cameraRayHit))
+                {
+                    // ...and if that object is the ground...
+                    if (cameraRayHit.transform.tag == "Ground")
+                    {
+                        // ...make the cube rotate (only on the Y axis) to face the ray hit's position 
+                        Vector3 targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
+                        transform.LookAt(targetPosition);
+
+                    }
                 }
             }
+            aimCamera = true;
+            
             //_combos._canCombo = true;
             _combos.SetCanCombo(true);
-            //_combos.CheckCombo();
             StartCoroutine("WaitFortTheInput");
             _combos.StartCoroutine("Combo");
+            
             //_combos.AttackAnimationEvent();
 
         }
+        
         _combos.ComboUpdate();
         #endregion
     }
@@ -139,5 +149,6 @@ public class PlayerInput : MonoBehaviour
         _isAttacking = true;
         yield return new WaitForSeconds(.5f);
         _isAttacking = false;
+        aimCamera = false;
     }
 }

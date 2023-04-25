@@ -12,6 +12,10 @@ public class Combos : MonoBehaviour
     [SerializeField] bool _canCombo = false;
     #endregion
 
+    //test
+    float maxComboWindow = .2f;
+    float comboWindow;
+
     //Components
     [SerializeField] Animator _animator;
 
@@ -21,6 +25,8 @@ public class Combos : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         _comboResetTimer = _comboTimer;
+        //test
+        comboWindow = maxComboWindow;
     }
 
     public bool GetCanCombo()
@@ -53,6 +59,8 @@ public class Combos : MonoBehaviour
         }
     }
 
+    
+
     public IEnumerator Combo()
     {
         _comboTimer = _comboResetTimer;
@@ -63,7 +71,7 @@ public class Combos : MonoBehaviour
             _comboCount = 0;
             _canCombo = false;
             //ComboUpdate(_animator);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
 
 
