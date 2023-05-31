@@ -48,7 +48,14 @@ public class PlayerInput : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+
+        if (_canInteract)
+        {
+
+        }
+
+        /*
         #region Combos
         //Combo
         _combos.CheckCombo();
@@ -86,6 +93,7 @@ public class PlayerInput : MonoBehaviour
         
         _combos.ComboUpdate();
         #endregion
+        */
     }
 
     private void FixedUpdate()
@@ -117,7 +125,7 @@ public class PlayerInput : MonoBehaviour
                 _isMoving = false;
             }
             // pass all parameters to the Movement script
-            _movement.Move(_move, _isMoving);
+            _movement.Move(_move, _isMoving, false);
         }
     }
 

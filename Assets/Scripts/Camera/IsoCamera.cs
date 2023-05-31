@@ -7,8 +7,6 @@ public class IsoCamera : MonoBehaviour
 {
     
     [SerializeField]Transform _playerTransform;//player transform
-    [SerializeField]PlayerInput _playerInput;
-    Transform _dialogueFocusTransform;
     [SerializeField]Camera _camera;
 
     public static int AlphaClipping = Shader.PropertyToID("_Alpha");
@@ -19,15 +17,12 @@ public class IsoCamera : MonoBehaviour
     float amount = 0;
     float increaseAmount = .9f;
 
-
     bool _isOnPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        _playerInput = _playerTransform.GetComponent<PlayerInput>();
-        _isOnPlayer = true;
     }
 
     private void Update()
@@ -57,28 +52,34 @@ public class IsoCamera : MonoBehaviour
             }
 
         }
+
+        
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_playerInput.GetCanInteract() == false)
-        {
-            _camera.orthographicSize = 5;
-            //update the positon
-            transform.position = _playerTransform.position;
-        }
-        else
-        {
-            _dialogueFocusTransform = _playerInput.GetDialogueTransform();
-            //_camera.orthographicSize = 3;
-            //transform.position = _dialogueFocusTransform.position;
-            
+        transform.position = _playerTransform.position;
 
+        // Check for input to rotate the object
+        if (Input.GetKey(KeyCode.Q))
+        {
+            RotateObject(-1f);
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            RotateObject(1f);
         }
 
-        
-
-
-        
     }
+
+    private void RotateObject(float direction)
+    {
+        // Set the desired rotation angle for the object
+        float rotationAngle = 2f * direction; // Adjust the rotation speed as desired
+
+        // Rotate the object around the player's position
+        transform.RotateAround(_playerTransform.position, Vector3.up, rotationAngle);
+    }
+
+
 }

@@ -48,8 +48,8 @@ public class PlayerAnimationManager : MonoBehaviour
                 break;
             case States.Moving:
                 _playerAnimator.SetBool("isMoving", true);
-                _playerAnimator.SetFloat("Forward", _movement._forwardAmount);
-                if (_movement._forwardAmount <= 0)
+                _playerAnimator.SetFloat("Forward", _movement.GetForwardAmount());
+                if (_movement.GetForwardAmount() <= 0)
                 {
                     _playerAnimator.SetBool("isMoving", false);
                     ReturnToIdle ();

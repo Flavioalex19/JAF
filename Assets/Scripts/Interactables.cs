@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-    public enum TypeOfInteraction { 
-        None,
-        Item,
-        NPC
-    
-    }
 
-    //public variables
-    public TypeOfInteraction MytypeOfInteraction;
 
     protected bool _canStartInteraction = false;
     [SerializeField]protected GameObject _mainCharacter;
@@ -31,24 +23,30 @@ public class Interactables : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            _mainCharacter = other.gameObject;
+            other.GetComponent<PlayerInput>().SetCanInteract(true);
+            
+            /*
             _canStartInteraction = true;
             _mainCharacter = other.gameObject;
-            //Debug.Log("Player");
             other.GetComponent<PlayerInput>().SetCanInteract(true);
-            other.GetComponent<PlayerInput>().SetDialogueTransform(transform);
-            if (MytypeOfInteraction == TypeOfInteraction.NPC)
-            {
-                other.GetComponent<PlayerInput>().SetDialogueTransform(transform);
-            }
+            //other.GetComponent<PlayerInput>().SetDialogueTransform(transform);
+            //other.GetComponent<PlayerInput>().SetDialogueTransform(transform);
+            _uiManager.SetIsDialoguePanelOn(true);
+            */
         }
         
         
     }
     private void OnTriggerExit(Collider other)
     {
+        other.GetComponent<PlayerInput>().SetCanInteract(false);
+        /*
         _canStartInteraction = false;
         _mainCharacter = null;
         other.GetComponent<PlayerInput>().SetCanInteract(false);
+        _uiManager.SetIsDialoguePanelOn(false);
+        */
     }
 
 

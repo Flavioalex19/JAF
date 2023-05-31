@@ -14,7 +14,6 @@ public class NPC : Interactables
     {
         _dialogueManager = GameObject.Find("Dialogue Manager").GetComponent<DialogueManager>();
 
-        MytypeOfInteraction = TypeOfInteraction.NPC;
     }
 
     private void Update()
