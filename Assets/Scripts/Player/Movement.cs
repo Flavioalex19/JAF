@@ -103,7 +103,7 @@ public class Movement : MonoBehaviour
 
             if (isSprinting) _forwardAmount = _forwardAmount * 2;
 
-            transform.position += transform.forward * Time.deltaTime * _forwardAmount *1.5f;
+            transform.position += transform.forward * Time.deltaTime * _forwardAmount * _characterSpeed;
         }
 
     }

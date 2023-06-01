@@ -13812,7 +13812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stationaryTurnSpeed: 720
   _movingTurnSpeed: 720
-  _characterSpeed: 0
+  _characterSpeed: 7
   _dashDistance: 0
   _dashDuration: 0
   _dashCooldown: 0
