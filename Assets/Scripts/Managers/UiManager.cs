@@ -1,51 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UiManager : MonoBehaviour
 {
-    #region InteractionText
-    bool _isInteractionTextOn = false;
+    GameObject cc_player;
 
-    #endregion
+    [SerializeField] Animator _interactionText_Animator;
 
     [Header("Dialogue")]
-    [SerializeField] Animator _dialogueAnimator;
+    [SerializeField] Animator _dialogue_Animator;
     bool _isDialoguePanelOn = false;
 
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cc_player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isInteractionTextOn)
-        {
-
-        }
-
+        _interactionText_Animator.SetBool("isOn", cc_player.GetComponent<PlayerInput>().GetCanInteract());
+        
 
         if (_isDialoguePanelOn)
         {
-            _dialogueAnimator.SetBool("isOn", true);
+            _dialogue_Animator.SetBool("isOn", true);
         }
-        else _dialogueAnimator.SetBool("isOn", false);
+        else _dialogue_Animator.SetBool("isOn", false);
     }
 
     #region Get& Set
-    public bool GetIsInteractionTextOn()
-    {
-        return _isInteractionTextOn;
-    }
-    public void SetIsInteractionTextOn(bool isInteractionTextOn)
-    {
-        _isInteractionTextOn=isInteractionTextOn;
-    }
+   
     public bool GetIsDialoguePanelOn()
     {
         return _isDialoguePanelOn;

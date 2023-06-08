@@ -5,9 +5,11 @@ using UnityEngine;
 public class Interactables : MonoBehaviour
 {
 
-
-    protected bool _canStartInteraction = false;
+    protected bool _canStartInteraction = false;//If the interaction can start
     [SerializeField]protected GameObject _mainCharacter;
+
+    //UI
+
 
     [SerializeField]protected UiManager _uiManager;
 

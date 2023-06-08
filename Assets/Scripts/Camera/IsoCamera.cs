@@ -22,7 +22,7 @@ public class IsoCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        //_playerTransform = GameObject.FindGameObjectWithTag("Camera Transform").transform;
     }
 
     private void Update()
